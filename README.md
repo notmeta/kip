@@ -1,5 +1,5 @@
 # kip
-A ShareX image hosting server written in Kotlin
+A ShareX image hosting server written in Kotlin targeting the JVM.
 
 <hr>
 
