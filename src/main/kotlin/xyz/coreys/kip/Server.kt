@@ -5,6 +5,7 @@ import xyz.coreys.kip.utils.Config
 import xyz.coreys.kip.utils.generateFileName
 import java.nio.file.Files
 import java.nio.file.Paths
+import javax.servlet.MultipartConfigElement
 
 
 object Server {
@@ -25,6 +26,8 @@ object Server {
 		// TODO secret token/password
 		
 		post("/${Config.uploadUrl}") {
+			request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
+			
 			var fileName = request.raw().getPart(Config.formName).submittedFileName
 			val extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length)
 			
