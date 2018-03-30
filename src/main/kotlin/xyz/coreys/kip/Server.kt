@@ -28,17 +28,17 @@ object Server {
 		post("/${Config.uploadUrl}") {
 			request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
 			
-			val oldFileName = request.raw().getPart(Config.formName).submittedFileName
-			val extension = oldFileName.substring(oldFileName.lastIndexOf('.') + 1, oldFileName.length)
-			val newFileName = generateFileName(".$extension")
+			val originalFile = request.raw().getPart(Config.formName).submittedFileName
+			val extension = originalFile.substring(originalFile.lastIndexOf('.') + 1, originalFile.length)
+			val fileToSave = if (Config.keepFileName) originalFile else generateFileName(".$extension")
 			
 			request.raw().getPart(Config.formName).inputStream.use({ input ->
-				Files.write(Paths.get(Config.uploadDirectory, newFileName), input.readBytes())
+				Files.write(Paths.get(Config.uploadDirectory, fileToSave), input.readBytes())
 			})
 			
 			val site = if (Config.siteUrl.endsWith("/")) Config.siteUrl else Config.siteUrl + "/"
 			
-			"$site$newFileName"
+			"$site$fileToSave"
 		}
 	}
 	

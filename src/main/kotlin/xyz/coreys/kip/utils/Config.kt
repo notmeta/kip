@@ -17,6 +17,7 @@ object Config {
 	var formName: String = Constants.DefaultConfiguration.FORM_NAME
 	var fileCharLength: Int = Constants.DefaultConfiguration.FILE_CHAR_LENGTH
 	var siteUrl: String = Constants.DefaultConfiguration.SITE_URL
+	var keepFileName: Boolean = Constants.DefaultConfiguration.KEEP_FILE_NAME
 	
 	init {
 		val configFile = File(Paths.get(Constants.CONFIG_PATH).toUri())
@@ -35,6 +36,7 @@ object Config {
 		jsonObject.addProperty("formName", formName)
 		jsonObject.addProperty("fileCharLength", fileCharLength)
 		jsonObject.addProperty("siteUrl", siteUrl)
+		jsonObject.addProperty("keepFileName", keepFileName)
 		
 		FileWriter(configFile.name).use { writer ->
 			val gson = GsonBuilder().setPrettyPrinting().create()
@@ -51,6 +53,7 @@ object Config {
 			formName = jsonObject.get("formName").asString
 			fileCharLength = jsonObject.get("fileCharLength").asInt
 			siteUrl = jsonObject.get("siteUrl").asString
+			keepFileName = jsonObject.get("keepFileName").asBoolean
 		}
 	}
 	

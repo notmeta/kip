@@ -9,6 +9,7 @@ object Constants {
 		const val FORM_NAME = "sharex"
 		const val FILE_CHAR_LENGTH = 6
 		const val SITE_URL = "http://example.com/"
+		const val KEEP_FILE_NAME = false
 	}
 	
 	const val CONFIG_PATH = "config.json"
