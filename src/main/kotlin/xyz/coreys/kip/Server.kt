@@ -7,15 +7,7 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import javax.servlet.MultipartConfigElement
 
-class Server private constructor() {
-	
-	private object Holder {
-		val INSTANCE = Server()
-	}
-	
-	companion object {
-		val instance: Server by lazy { Holder.INSTANCE }
-	}
+object Server {
 	
 	init {
 		println("Created Kip Server singleton")
@@ -46,12 +38,11 @@ class Server private constructor() {
 		post("/upload") {
 			val tempFile = Files.createTempFile(uploadDir.toPath(), "", ".png")
 			
-			this.request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
+			request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
 			
-			this.request.raw().getPart("sharex").inputStream
-				.use({ input ->
-					Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING)
-				})
+			request.raw().getPart("sharex").inputStream.use({ input ->
+				Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING)
+			})
 			
 			"http://${this.request.host()}/${tempFile.fileName}"
 		}
