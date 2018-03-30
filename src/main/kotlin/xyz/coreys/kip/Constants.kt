@@ -3,7 +3,7 @@ package xyz.coreys.kip
 object Constants {
 	
 	object DefaultConfiguration {
-		const val PORT = 80
+		const val PORT = STANDARD_HTTP_PORT
 		const val UPLOAD_DIR = "upload"
 		const val UPLOAD_URL = "upload"
 		const val FORM_NAME = "sharex"
@@ -13,5 +13,6 @@ object Constants {
 	}
 	
 	const val CONFIG_PATH = "config.json"
+	const val STANDARD_HTTP_PORT = 80
 	
 }

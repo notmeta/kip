@@ -35,9 +35,14 @@ object Server {
 				Files.write(Paths.get(Config.uploadDirectory, fileToSave), input.readBytes())
 			})
 			
-			val site = if (Config.siteUrl.endsWith("/")) Config.siteUrl else Config.siteUrl + "/"
+			val appendPort = if (Config.port != Constants.STANDARD_HTTP_PORT) ":${Config.port}" else ""
+			val siteUrl = if (Config.siteUrl.endsWith("/")) {
+				Config.siteUrl.removeSuffix("/") + appendPort + "/"
+			} else {
+				"${Config.siteUrl}:$appendPort/"
+			}
 			
-			"$site$fileToSave"
+			"$siteUrl$fileToSave"
 		}
 	}
 	
