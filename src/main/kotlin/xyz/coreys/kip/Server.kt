@@ -26,16 +26,17 @@ object Server {
 		// TODO secret token/password
 		
 		post("/${Config.uploadUrl}") {
-			val tempFile = Files.createTempFile(Paths.get(Config.uploadDirectory), "", ".png")
-			
 			request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
+			
+			var fileName = ""
 			
 			request.raw().getPart(Config.formName).inputStream.use({ input ->
 				val fileExtension = URLConnection.guessContentTypeFromStream(input)
-				Files.write(Paths.get(Config.uploadDirectory, generateFileName(".$fileExtension")), input.readBytes())
+				fileName = generateFileName(".$fileExtension")
+				Files.write(Paths.get(Config.uploadDirectory, fileName), input.readBytes())
 			})
 			
-			"http://${this.request.host()}/${tempFile.fileName}"
+			"http://${this.request.host()}/$fileName"
 		}
 	}
 	
