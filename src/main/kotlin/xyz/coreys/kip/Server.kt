@@ -23,7 +23,7 @@ class Server private constructor() {
 	}
 	
 	private fun startServer() {
-		port(80)
+		port(8080)
 		ignite()
 	}
 	
@@ -53,14 +53,7 @@ class Server private constructor() {
 					Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING)
 				})
 			
-			"""
-				{
-    				"status": 200,
-    				"data": {
-        			"link": ${this.request.host()}/${tempFile.fileName}
-    				}
-				}
-				"""
+			"http://${this.request.host()}/${tempFile.fileName}"
 		}
 	}
 	
