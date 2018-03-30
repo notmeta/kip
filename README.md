@@ -1,5 +1,5 @@
 # kip
-A ShareX image hosting server written in Kotlin targeting the JVM.  
+A ShareX file upload and hosting server written in Kotlin targeting the JVM.  
 
 <hr>
 
@@ -10,6 +10,7 @@ A ShareX image hosting server written in Kotlin targeting the JVM.
 - Autogenerate .sxcu file (*and/or json input string*) to import into sharex automatically
 - Documentation
 - Commands to run while server is live, i.e. download zip of all currently uploaded images, restart server
+- Option to drop file extension on the return link, i.e. 'http://coreys.xyz/image.png' -> 'http://coreys.xyz/image'
 
 <hr>  
 
