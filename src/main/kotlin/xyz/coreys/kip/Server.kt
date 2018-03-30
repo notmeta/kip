@@ -33,7 +33,7 @@ object Server {
 			val newFileName = generateFileName(".$extension")
 			
 			request.raw().getPart(Config.formName).inputStream.use({ input ->
-				Files.write(Paths.get(Config.uploadDirectory, oldFileName), input.readBytes())
+				Files.write(Paths.get(Config.uploadDirectory, newFileName), input.readBytes())
 			})
 			
 			val site = if (Config.siteUrl.endsWith("/")) Config.siteUrl else Config.siteUrl + "/"
