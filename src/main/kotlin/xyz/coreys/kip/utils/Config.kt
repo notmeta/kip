@@ -45,16 +45,21 @@ object Config {
 	}
 	
 	private fun loadConfig(configFile: File) {
-		FileReader(configFile.name).use { reader ->
-			val jsonObject = JsonParser().parse(reader) as JsonObject
-			port = jsonObject.get("port").asInt
-			uploadDirectory = jsonObject.get("uploadDirectory").asString
-			uploadUrl = jsonObject.get("uploadUrl").asString
-			formName = jsonObject.get("formName").asString
-			fileCharLength = jsonObject.get("fileCharLength").asInt
-			siteUrl = jsonObject.get("siteUrl").asString
-			keepFileName = jsonObject.get("keepFileName").asBoolean
+		try {
+			FileReader(configFile.name).use { reader ->
+				val jsonObject = JsonParser().parse(reader) as JsonObject
+				port = jsonObject.get("port").asInt
+				uploadDirectory = jsonObject.get("uploadDirectory").asString
+				uploadUrl = jsonObject.get("uploadUrl").asString
+				formName = jsonObject.get("formName").asString
+				fileCharLength = jsonObject.get("fileCharLength").asInt
+				siteUrl = jsonObject.get("siteUrl").asString
+				keepFileName = jsonObject.get("keepFileName").asBoolean
+			}
+		} catch (e: IllegalStateException) {
+			createConfig(configFile) // recreate the config file with the missing fields (keeps the original data)
 		}
+		
 	}
 	
 }
