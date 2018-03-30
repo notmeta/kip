@@ -1,6 +1,7 @@
 package xyz.coreys.kip
 
 import spark.kotlin.*
+import xyz.coreys.kip.utils.Config
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -9,30 +10,20 @@ import javax.servlet.MultipartConfigElement
 
 object Server {
 	
-	init {
-		println("Created Kip Server singleton")
-		// TODO load config file
-	}
-	
 	private fun startServer() {
-		port(8080)
+		port(Config.port)
 		ignite()
 	}
 	
 	fun run() {
 		startServer()
 		
-		// TODO replace upload directory with location from config file
-		staticFiles.externalLocation(Paths.get("upload").toString())
+		staticFiles.externalLocation(Paths.get(Config.uploadDirectory).toString())
 		
-		val uploadDir = File("upload")
+		val uploadDir = File(Config.uploadDirectory)
 		
 		get("/upload") {
 			halt(405)
-		}
-		
-		get("/") {
-			this.request.host()
 		}
 		
 		post("/upload") {
@@ -40,7 +31,7 @@ object Server {
 			
 			request.attribute("org.eclipse.jetty.multipartConfig", MultipartConfigElement("/temp"))
 			
-			request.raw().getPart("sharex").inputStream.use({ input ->
+			request.raw().getPart(Config.formName).inputStream.use({ input ->
 				Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING)
 			})
 			
