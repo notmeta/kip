@@ -3,7 +3,8 @@ A ShareX image hosting server written in Kotlin targeting the JVM.
 
 <hr>
 
-#### Example config.json file:
+### Examples:  
+#### config.json
 ```json
 {
   "port": 80,
@@ -15,6 +16,9 @@ A ShareX image hosting server written in Kotlin targeting the JVM.
   "keepFileName": false
 }
 ```
+#### Output:
+http://coreys.xyz/w6z1jH.png  
+http://coreys.xyz/hWIh7f.txt  
 
 <hr>
 
