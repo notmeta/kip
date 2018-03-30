@@ -13,7 +13,9 @@ object Config {
 	
 	var port: Int = Constants.DefaultConfiguration.PORT
 	var uploadDirectory: String = Constants.DefaultConfiguration.UPLOAD_DIR
+	var uploadUrl: String = Constants.DefaultConfiguration.UPLOAD_URL
 	var formName: String = Constants.DefaultConfiguration.FORM_NAME
+	var fileCharLength: Int = Constants.DefaultConfiguration.FILE_CHAR_LENGTH
 	
 	init {
 		val configFile = File(Paths.get(Constants.CONFIG_PATH).toUri())
@@ -28,7 +30,9 @@ object Config {
 		val jsonObject = JsonObject()
 		jsonObject.addProperty("port", port)
 		jsonObject.addProperty("uploadDirectory", uploadDirectory)
+		jsonObject.addProperty("uploadUrl", uploadUrl)
 		jsonObject.addProperty("formName", formName)
+		jsonObject.addProperty("fileCharLength", fileCharLength)
 		
 		FileWriter(configFile.name).use { writer ->
 			val gson = GsonBuilder().setPrettyPrinting().create()
@@ -41,7 +45,9 @@ object Config {
 			val jsonObject = JsonParser().parse(reader) as JsonObject
 			port = jsonObject.get("port").asInt
 			uploadDirectory = jsonObject.get("uploadDirectory").asString
+			uploadUrl = jsonObject.get("uploadUrl").asString
 			formName = jsonObject.get("formName").asString
+			fileCharLength = jsonObject.get("fileCharLength").asInt
 		}
 	}
 	
