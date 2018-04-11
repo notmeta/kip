@@ -22,7 +22,6 @@ A ShareX file upload and hosting server written in Kotlin targeting the JVM.
   "uploadDirectory": "upload",
   "uploadUrl": "upload",
   "formName": "sharex",
-  "fileCharLength": 7,
   "siteUrl": "http://coreys.xyz/",
   "keepFileName": false
 }
