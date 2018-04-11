@@ -15,7 +15,6 @@ object Config {
 	var uploadDirectory: String = Constants.DefaultConfiguration.UPLOAD_DIR
 	var uploadUrl: String = Constants.DefaultConfiguration.UPLOAD_URL
 	var formName: String = Constants.DefaultConfiguration.FORM_NAME
-	var fileCharLength: Int = Constants.DefaultConfiguration.FILE_CHAR_LENGTH
 	var siteUrl: String = Constants.DefaultConfiguration.SITE_URL
 	var keepFileName: Boolean = Constants.DefaultConfiguration.KEEP_FILE_NAME
 	
@@ -34,7 +33,6 @@ object Config {
 		jsonObject.addProperty("uploadDirectory", uploadDirectory)
 		jsonObject.addProperty("uploadUrl", uploadUrl)
 		jsonObject.addProperty("formName", formName)
-		jsonObject.addProperty("fileCharLength", fileCharLength)
 		jsonObject.addProperty("siteUrl", siteUrl)
 		jsonObject.addProperty("keepFileName", keepFileName)
 		
@@ -52,14 +50,12 @@ object Config {
 				uploadDirectory = jsonObject.get("uploadDirectory").asString
 				uploadUrl = jsonObject.get("uploadUrl").asString
 				formName = jsonObject.get("formName").asString
-				fileCharLength = jsonObject.get("fileCharLength").asInt
 				siteUrl = jsonObject.get("siteUrl").asString
 				keepFileName = jsonObject.get("keepFileName").asBoolean
 			}
 		} catch (e: IllegalStateException) {
 			createConfig(configFile) // recreate the config file with the missing fields (keeps the original data)
 		}
-		
 	}
 	
 }
