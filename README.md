@@ -4,7 +4,7 @@ A ShareX file upload and hosting server written in Kotlin targeting the JVM.
 <hr>
 
 ### Future plans:
-- Logging system to log requests and track things like user-agents, headers, IPs, etc
+- Logging system to log requests and anonymously track things like user-agents, headers, etc
 - Secret token/password system
 - Custom image directories, i.e. 'http://coreys.xyz/screenshots/image.png' vs 'http://coreys.xyz/image.png'
 - URL Shortening service
