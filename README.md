@@ -12,6 +12,7 @@ A ShareX file upload and hosting server written in Kotlin targeting the JVM.
 - Documentation
 - Commands to run while server is live, i.e. download zip of all currently uploaded images, restart server
 - Option to drop file extension on the return link, i.e. 'http://coreys.xyz/image.png' -> 'http://coreys.xyz/image'
+- Create a submodule for https://github.com/notmeta/rudder
 
 <hr>  
 
